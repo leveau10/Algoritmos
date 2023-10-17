@@ -90,17 +90,31 @@ public:
             return -1;
     }
 
-    void insert_at(int index, int value){ // Insere 'value' no índice 'index FALTA AJEITAR O HEAD E TAIL
-        ll_int_node *current = this->head;
-        ll_int_node *before;
-        for(int i = 0; i < index; i++){
-            before = current;
-            current = current->next;
-        }
+    void insert_at(int index, int value){ // Insere 'value' no índice 'index TESTADO OK
         ll_int_node* new_node = new ll_int_node;
         new_node->value = value;
-        new_node->next = current;
-        before->next = new_node;
+
+        ll_int_node *current = this->head;
+        ll_int_node *before;
+        if(index == 0){
+            this->head = new_node;
+            new_node->next = current;
+        }else if(index == size_ ){
+            for(int i = 0; i < size_-1; i++){
+                current = current->next;
+            }
+            this->tail = new_node;
+            new_node->next = 0;
+            current->next = new_node;
+        }else{
+            for(int i = 0; i< index; i++){
+                before = current;
+                current = current->next;
+            }
+            before->next = new_node;
+            new_node->next = current;
+        }
+        size_++;
     } 
 
     int get_at(int index){ // retorna o elemento do índice 'index' TESTADO OK
@@ -112,7 +126,31 @@ public:
         return current->value;
     } 
 
-    // void remove_at(int index){} // remove o elemento do índice index
+    void remove_at(int index){  // remove o elemento do índice index TESTADO OK
+        ll_int_node *current = this->head;
+        ll_int_node *before;
+        if (this->head == 0)
+            return;
+        if(index == 0){
+            this->head = current->next;
+            delete current;
+        }else if(index == size_ ){
+            for(int i = 0; i < size_- 2; i++){
+                before = current;
+                current = current->next;
+            }
+            this->tail = before;
+            delete current;
+        }else{
+            for(int i = 0; i< index; i++){
+                before = current;
+                current = current->next;
+            }
+            before->next = current->next;
+            delete current;
+        }
+        size_--;
+    }
 
     unsigned int size() { // retorna a quantidade de elementos da lista  TESTADO OK
         return size_; 
@@ -174,16 +212,18 @@ public:
 
 int main() {
     ll_int lista1;
-    for (int i=1 ; i<=30; i+=3){
+    for (int i=1 ; i<30; i+=3){
         lista1.push_back(i);
     }
-
+    lista1.insert_at(1,20);
+    lista1.insert_at(0,20);
+    lista1.remove_at(0);
     std::cout << lista1.sum() << std::endl;
     std::cout << "Size: " << lista1.size() << std::endl; 
 
-
+    int size = lista1.size();
     std::cout << "lista1 = { ";
-    for (int i=0 ; i<10 ; ++i){
+    for (int i=0 ; i< size ; ++i){
         std::cout << lista1.front() << " ";
         lista1.pop_front();
     }
