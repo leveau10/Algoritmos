@@ -1,7 +1,5 @@
-// - implemente os métodos definidos na classe ll_int
-// - Defina o desempenho de cada método usando a notação big-Oh
-// - Realize testes para cada método implementado
-#include <iostream>
+#ifndef __LINKED_LIST_IFRN__
+#define __LINKED_LIST_IFRN__
 
 class ll_int {
 private:
@@ -209,24 +207,4 @@ public:
 
 };
 
-
-int main() {
-    ll_int lista1;
-    for (int i=1 ; i<30; i+=3){
-        lista1.push_back(i);
-    }
-    lista1.insert_at(1,20);
-    lista1.insert_at(0,20);
-    lista1.remove_at(0);
-    std::cout << lista1.sum() << std::endl;
-    std::cout << "Size: " << lista1.size() << std::endl; 
-
-    int size = lista1.size();
-    std::cout << "lista1 = { ";
-    for (int i=0 ; i< size ; ++i){
-        std::cout << lista1.front() << " ";
-        lista1.pop_front();
-    }
-    std::cout << "}" << std::endl;
-    return 0;
-}
+#endif // __LINKED_LIST_IFRN__
