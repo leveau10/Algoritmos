@@ -12,12 +12,12 @@ private:
     int size_;
     ll_int_node *head, *tail;
 public:
-    ll_int() {
+    ll_int() {  //   O(1)
         this->head = 0;
         this->tail = 0;
         size_  = 0;
     }
-    ~ll_int(){
+    ~ll_int(){    //    O(N)
         ll_int_node *current, *to_remove;
         current = this->head;
         while (current!=0){
@@ -25,8 +25,8 @@ public:
             current = current->next;
             delete to_remove;
         }
-    }
-    void push_front(int value) { 
+    } 
+    void push_front(int value) {  //     O(1)
         ll_int_node* new_node = new ll_int_node;
         new_node->value = value;
         new_node->next = this->head;
@@ -36,7 +36,7 @@ public:
         size_++;
     }
 
-    void push_back(int value){
+    void push_back(int value){  //     O(1)
         ll_int_node* new_node = new ll_int_node;
         new_node->value = value;
         new_node->next = 0;
@@ -48,7 +48,7 @@ public:
         size_++;
     }
 
-    void pop_front(){
+    void pop_front(){  // O(1)
         if (this->head == 0)
             return;
         ll_int_node *to_remove = this->head;
@@ -59,7 +59,7 @@ public:
         size_--;
     }
 
-    void pop_back(){
+    void pop_back(){  // O(n)
         if (this->tail == 0)
             return;
         if (this->head == this->tail){
@@ -76,20 +76,20 @@ public:
         size_--;
     }
 
-    int front(){
+    int front(){ // O(1)
         if (this->head != 0)
             return this->head->value;
         else
             return -1;
     }
-    int back(){
+    int back(){ // O(1)
         if (this->tail != 0)
             return this->tail->value;
         else
             return -1;
     }
 
-    void insert_at(int index, int value){ // Insere 'value' no índice 'index TESTADO OK
+    void insert_at(int index, int value){ //     O(N)
         ll_int_node* new_node = new ll_int_node;
         new_node->value = value;
 
@@ -116,7 +116,7 @@ public:
         size_++;
     } 
 
-    int get_at(int index){ // retorna o elemento do índice 'index' TESTADO OK
+    int get_at(int index){ //    O(N)
         ll_int_node *current = this->head;
         for (int i = 0; i < index; i++)
         {
@@ -125,7 +125,7 @@ public:
         return current->value;
     } 
 
-    void remove_at(int index){  // remove o elemento do índice index TESTADO OK
+    void remove_at(int index){  //     O(N-2)
         ll_int_node *current = this->head;
         ll_int_node *before;
         if (this->head == 0)
@@ -151,11 +151,11 @@ public:
         size_--;
     }
 
-    unsigned int size() { // retorna a quantidade de elementos da lista  TESTADO OK
+    unsigned int size() { //   O(1)
         return size_; 
     } 
 
-    int count(int value){ // conta quantas vezes 'value' ocore na lista  TESTADO OK 
+    int count(int value){ // O(N)
         ll_int_node *current = this->head;
         int count = 0;
         for(int i = 0; i<size_ ; i++){
@@ -167,7 +167,7 @@ public:
         return count;
     } 
 
-    int sum(){ // soma os elementos da lista TESTADO OK
+    int sum(){ // O(N)
         ll_int_node *current = this->head;
         int sum = current->value;
         for (int i = 0; i < size_-1; i++)
@@ -178,7 +178,7 @@ public:
         return sum;
     } 
 
-    int max(){ // retorna o maior elemento da lista TESTADO OK
+    int max(){ // O(N)
         ll_int_node *current = this->head;
         int max = current->value;
         for (int i = 0; i < size_-1; i++)
@@ -192,7 +192,7 @@ public:
         return max;
     } 
 
-    int min(){     // retorna o menor elemento da lista TESTADO OK
+    int min(){     //   O(N)
         ll_int_node *current = this->head;
         int min = current->value;
         for (int i = 0; i < size_-1; i++)
@@ -206,7 +206,7 @@ public:
         return min;
     }
 
-    bool repeated(){
+    bool repeated(){ //   O(nlogn)
         if (size_== 0){
             return false;
         }
@@ -226,7 +226,7 @@ public:
         return false;
     }
 
-    void bigDifference(){
+    void bigDifference(){ // O(N)
         int diff = 0, index = 0;
         ll_int_node *current = this->head;
         for (int i = 0; i < size_-1; i++){
