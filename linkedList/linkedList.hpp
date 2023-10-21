@@ -1,5 +1,6 @@
 #ifndef __LINKED_LIST_IFRN__
 #define __LINKED_LIST_IFRN__
+#include <iostream>
 
 class ll_int {
 private:
@@ -203,6 +204,53 @@ public:
         }
             
         return min;
+    }
+
+    bool repeated(){
+        if (size_== 0){
+            return false;
+        }
+        
+        ll_int_node *current = this->head;
+        ll_int_node *temp;
+        for (int i = 0; i < size_-1; i++){
+            temp = current->next;
+            for (int j = i+1; j < size_; j++) {
+                if (current->value - temp->value == 0){
+                    return true;
+                }
+                temp = temp->next;
+            }
+            current = current->next;
+        }
+        return false;
+    }
+
+    void bigDifference(){
+        int diff = 0, index = 0;
+        ll_int_node *current = this->head;
+        for (int i = 0; i < size_-1; i++){
+            if (current->value - current->next->value < 0 )
+            {
+                if ((current->value - current->next->value) * -1 > diff)
+                {
+                    diff = (current->value - current->next->value) * -1;
+                    index = i;
+                    std::cout << "atualizou " << index << " " << diff << std::endl ;
+                }
+                
+            }else{
+                if (current->value - current->next->value > diff)
+                {
+                    diff = current->value - current->next->value;
+                    index = i;
+                    std::cout << "atualizou " << index << " " << diff << std::endl ;
+                }
+                
+            }
+            current = current->next;
+        }
+        std::cout << "Index: " << index << " Diff: " << diff << std::endl;
     }
 
 };
