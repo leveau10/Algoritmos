@@ -7,7 +7,6 @@ int fatn(int num){
     }else {
         return num*fatn(num-1);
     }
-
 }
 
 int main(int argc, char const *argv[])
