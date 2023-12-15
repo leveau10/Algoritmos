@@ -11,7 +11,7 @@ bool ordenado(int a[], unsigned int t){
 /* TODO: Implementar função */
 void selecao(int a[], unsigned int t){
     
-    for (int i = 0; i < t-1; i++){
+    for(int i = 0; i < t-1; i++){
         int menor = a[i];
         int index = i;
         for (int j = i; j < t; j++)
@@ -29,7 +29,26 @@ void selecao(int a[], unsigned int t){
 
 /* TODO: Implementar função */
 void insercao(int a[], unsigned int t){
-    
+
+    if (ordenado(a, t))
+    {
+        std::cout << "entrou" << std::endl;
+        return void();
+    }
+    std::cout << "não ordenado" << std::endl;
+    for (int i = 1; i < t; i++)
+    {
+        int ins = a[i];
+        for (int j = 0; j < i+1; j++)
+        {
+            if (ins < a[j])
+            {
+                int temp = a[i];
+                a[i] = a[j];
+                a[j] = temp;
+            }
+        }
+    }
 }
 
 /* TODO: Implementar função */
@@ -37,9 +56,9 @@ void merge_sort(int a[], unsigned int t);
 
 int main(int argc, char const *argv[])
 {
-    int size = 10;
-    int a[size] = {5,4,3,2,1,4,5,4,2,3};
-    selecao(a, size);
+    int size = 5;
+    int a[size] = {5,3,8,2,1};
+    insercao(a, size);
     
     
     for (int i = 0; i < size; i++)
